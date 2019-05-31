@@ -99,7 +99,13 @@ class Motor{
   void DriveUp(){
    int steps;
    switch(motorNum)
-   {
+   {  
+      case 1:
+        steps = 300;
+      case 2:
+        steps = 300;
+      case 3:
+        steps = 300;
       case 4:
         steps = 100;
       case 5:
@@ -132,12 +138,18 @@ class Motor{
     int steps;
     switch(motorNum)
     {
+      case 1:
+        steps = 500;
+      case 2:
+        steps = 500;
+      case 3:
+        steps = 500;
       case 4:
-        steps = 100;
+        steps = 500;
       case 5:
-        steps = 125;
+        steps = 525;
       case 6:
-        steps = 350;
+        steps = 550;
     }
     for(int i = 0; i < steps; i++){
         if(PORTB == portBTNum1){
@@ -192,31 +204,13 @@ class BrailleCell{
     }
 };
 
-
-
-//CHANGE NUMBER IN THIS LINE TO CHANGE THE NUMBER OF THE MOTOR
-Motor motor1(5);
-//////////////////////////////////////////////////////////////
-
-
-
-
-
-Switch switch1(7, 13);
+BrailleCell BC;
 
 void setup() {
-  // put your setup code here, to run once:
-   
+  randomSeed(analogRead(0));
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  switch1.Update();
-  if(switch1.state == 1 && switch1.prevState != 1){
-    motor1.DriveUp();
-  }
-  else if(switch1.state == -1 && switch1.prevState != -1){
-    motor1.DriveDown();
-  }
-  else{}
+  int character = random(0,64);
+  BC.Update(character);
 }
